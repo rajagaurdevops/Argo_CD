@@ -18,82 +18,58 @@ argocd app create <app-name> \
   --dest-namespace <namespace>
 
 2. Managing Applications
+argocd app list      :>  List all applications managed by ArgoCD:
 
-    List all applications managed by ArgoCD:
-argocd app list
+argocd app sync <app-name>   :>  Sync an application to match the Git repository:
 
-Sync an application to match the Git repository:
-argocd app sync <app-name>
+argocd app get <app-name>     :>  Get the current status of an application:
 
-Get the current status of an application:
-argocd app get <app-name>
+argocd app delete <app-name>   :> Delete an application:
 
-Delete an application:
-argocd app delete <app-name>
+argocd app wait <app-name> --health   :> Wait for the application to become healthy:
 
-Wait for the application to become healthy:
-argocd app wait <app-name> --health
-
-Set application parameters (e.g., update image, set resource limits):
-    argocd app set <app-name> --<parameter-name> <value>
+argocd app set <app-name> --<parameter-name> <value>    :>  Set application parameters (e.g., update image, set resource limits):
 
 3. Managing Repositories
-    Add a Git or Helm repository to ArgoCD:
-argocd repo add <repo-url> --username <username> --password <password> --name <repo-name>
+argocd repo add <repo-url> --username <username> --password <password> --name <repo-name>  :>  Add a Git or Helm repository to ArgoCD:
 
-List all repositories added to ArgoCD:
-argocd repo list
+argocd repo list    :> List all repositories added to ArgoCD
 
-Remove a repository from ArgoCD:
-    argocd repo remove <repo-name>
+argocd repo remove <repo-name>   :>  Remove a repository from ArgoCD
 
 4. Managing Clusters
-    Add a Kubernetes cluster to ArgoCD:
-argocd cluster add <cluster-name>
+argocd cluster add <cluster-name>   :>  Add a Kubernetes cluster to ArgoCD:
 
-List all Kubernetes clusters connected to ArgoCD:
-argocd cluster list
+argocd cluster list   :>  List all Kubernetes clusters connected to ArgoCD:
 
-Remove a Kubernetes cluster from ArgoCD:
-    argocd cluster remove <cluster-name>
+argocd cluster remove <cluster-name>   :>  Remove a Kubernetes cluster from ArgoCD:
 
 5. Authentication
-    Log into the ArgoCD server:
-argocd login <argocd-server> --username <username> --password <password>
+argocd login <argocd-server> --username <username> --password <password>   :>  Log into the ArgoCD server:
 
-List the details of your currently logged-in ArgoCD account:
-argocd account list
+argocd account list  :> List the details of your currently logged-in ArgoCD account:
 
-Log out from the ArgoCD server:
-    argocd logout <argocd-server>
+argocd logout <argocd-server>   :>  Log out from the ArgoCD server:
 
 6. Managing Projects
-    Create a project in ArgoCD (used to group applications under a project):
-argocd proj create <project-name> --description <description> --dest-namespace <namespace>
+argocd proj create <project-name> --description <description> --dest-namespace <namespace>   :>  Create a project in ArgoCD (used to group applications under a project):
 
-List all projects created in ArgoCD:
-argocd proj list
+argocd proj list   :>  List all projects created in ArgoCD:
 
-Delete a project from ArgoCD:
-    argocd proj delete <project-name>
+argocd proj delete <project-name>   :>  Delete a project from ArgoCD:
 
 7. Application Health & Sync Status
-    Show the health status of an application (e.g., Healthy, Degraded, Missing, etc.):
-argocd app health <app-name>
+argocd app health <app-name>   :>  Show the health status of an application (e.g., Healthy, Degraded, Missing, etc.)
 
-Show whether the application is in sync with the Git repository:
-    argocd app sync-status <app-name>
+argocd app sync-status <app-name>    :>  Show whether the application is in sync with the Git repository:
 
 8. Version and Help
-    Display the version of ArgoCD CLI and server:
-argocd version
+argocd version    :>  Display the version of ArgoCD CLI and server:
 
-Get detailed help for any specific ArgoCD command:
-    argocd <command> --help
+argocd <command> --help   :>  Get detailed help for any specific ArgoCD command:
 
 9. Kubeconfig and Dashboard
-    Export the kubeconfig file for a given cluster:
-argocd cluster kubeconfig <cluster-name>
+argocd cluster kubeconfig <cluster-name>    :>  Export the kubeconfig file for a given cluster:
 
 Open the ArgoCD web UI in your browser via port forwarding:
 argocd admin dashboard
