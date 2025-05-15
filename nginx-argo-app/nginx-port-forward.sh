@@ -32,3 +32,6 @@ fi
 # Kubernetes की service को उस free port पर forward करो
 echo " Forwarding service '$SERVICE_NAME' to http://localhost:$PORT_FOUND"
 kubectl port-forward svc/$SERVICE_NAME $PORT_FOUND:80 -n $NAMESPACE
+
+kubectl port-forward svc/argocd-server -n argocd 8080:443  :>  port forwarding
+kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d
