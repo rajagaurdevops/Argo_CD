@@ -14,6 +14,6 @@ spec:
     spec:
       containers:
         - name: app
-          image: rajagaurdevops/argocd-demo:o1
+          image: rajagaurdevops/argocd-demo:01
           ports:
             - containerPort: 3000
