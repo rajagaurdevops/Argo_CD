@@ -1,0 +1,10 @@
+replicaCount: 2
+
+image:
+  repository: your-dockerhub-username/flask-demo
+  tag: latest
+  pullPolicy: IfNotPresent
+
+service:
+  type: ClusterIP
+  port: 80
