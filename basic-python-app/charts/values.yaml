@@ -1,0 +1,29 @@
+replicaCount: 2
+
+image:
+  repository: rajagaurdevops/flask-demo
+  tag: 20250701173914
+  pullPolicy: IfNotPresent
+
+service:
+  type: ClusterIP
+  port: 80
+
+# ingress:
+#   enabled: false
+#   className: ""
+#   annotations: {}
+#   hosts:
+#     - host: basic-python-app.local
+#       paths:
+#         - path: /
+#           pathType: Prefix
+#   tls: []
+
+# resources: {}
+
+# nodeSelector: {}
+
+# tolerations: []
+
+# affinity: {}

@@ -2,7 +2,7 @@ replicaCount: 5
 
 image:
   repository: rajagaurdevops/flask-demo
-  tag: latest
+  tag: 20250701174702
   pullPolicy: IfNotPresent
 
 service:
