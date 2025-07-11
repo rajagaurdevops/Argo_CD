@@ -1,9 +1,9 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: nginx-deployment
+  name: nginx
 spec:
-  replicas: 1
+  replicas: {{ .Values.replicaCount }}
   selector:
     matchLabels:
       app: nginx
@@ -14,14 +14,13 @@ spec:
     spec:
       containers:
       - name: nginx
-        image: nginx
+        image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
         ports:
         - containerPort: 80
         volumeMounts:
-        - name: html
-          mountPath: /usr/share/nginx/html/index.html
-          subPath: welcome.message
+        - name: html-volume
+          mountPath: /usr/share/nginx/html/app
       volumes:
-      - name: html
+      - name: html-volume
         configMap:
-          name: nginx-config
+          name: nginx-html

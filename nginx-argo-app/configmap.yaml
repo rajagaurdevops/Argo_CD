@@ -1,7 +1,0 @@
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: nginx-config
-data:
-  welcome.message: |
-    <h1>Welcome to ArgoCD NGINX App!</h1>

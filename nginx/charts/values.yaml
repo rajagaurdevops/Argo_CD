@@ -1,0 +1,20 @@
+replicaCount: 1
+image:
+  repository: nginx
+  tag: latest
+  pullPolicy: IfNotPresent
+
+service:
+  type: NodePort
+  port: 80
+
+ingress:
+  enabled: true
+  host: localhost
+
+customPage: |
+  <html>
+    <body style="background:
+      <h1>This is a Custom Page at /app 🎉</h1>
+    </body>
+  </html>
