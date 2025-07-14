@@ -21,7 +21,10 @@ spec:
         volumeMounts:
         - name: jenkins-home
           mountPath: /var/jenkins_home
-        resources:
+        envFrom:                         
+        - configMapRef:
+            name: {{ .Values.configMap.name }}
+        resources:                        
           {{- toYaml .Values.resources | nindent 10 }}
       volumes:
       - name: jenkins-home

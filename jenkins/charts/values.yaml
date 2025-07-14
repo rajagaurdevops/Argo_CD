@@ -22,3 +22,17 @@ resources:
   requests:
     cpu: 250m
     memory: 512Mi
+
+configMap:
+  enabled: true
+  name: jenkins-config
+  data:
+    JENKINS_OPTS: "--prefix=/jenkins"
+    "USERNAME": "admin"
+    "AUTHOR": "raja kumar gaur"
+    "DEPARTMENT": "devops"
+
+
+
+
+namespace: dev
