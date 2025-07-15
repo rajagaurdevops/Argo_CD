@@ -4,8 +4,8 @@ kind: ConfigMap
 metadata:
   name: {{ .Values.configMap.name }}
 data:
-  JENKINS_OPTS: "{{ .Values.configMap.JENKINS_OPTS }}"
-  USERNAME:  "{{ .Values.configMap.USERNAME}}"
-  DEPARTMENT: "{{ .Values.configMap.DEPARTMENT}}"
-  AUTHOR: "{{ .Values.configMap.AUTHOR}}"
+  JENKINS_OPTS: "{{ .Values.configMap.data.JENKINS_OPTS }}"
+  USERNAME: "{{ .Values.configMap.data.USERNAME }}"
+  DEPARTMENT: "{{ .Values.configMap.data.DEPARTMENT }}"
+  AUTHOR: "{{ .Values.configMap.data.AUTHOR }}"
 {{- end }}
