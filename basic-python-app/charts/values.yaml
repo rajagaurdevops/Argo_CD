@@ -9,21 +9,10 @@ service:
   type: ClusterIP
   port: 80
 
-# ingress:
-#   enabled: false
-#   className: ""
-#   annotations: {}
-#   hosts:
-#     - host: basic-python-app.local
-#       paths:
-#         - path: /
-#           pathType: Prefix
-#   tls: []
-
-# resources: {}
-
-# nodeSelector: {}
-
-# tolerations: []
-
-# affinity: {}
+resources:          # Resource requests & limits for pods
+  limits:
+    cpu: 500m       # Max CPU the pod can use
+    memory: 512Mi   # Max memory the pod can use
+  requests:
+    cpu: 250m       # Guaranteed minimum CPU
+    memory: 256Mi
