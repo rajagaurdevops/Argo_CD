@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: {{ .Values.mysql.name }}   # StatefulSet name from values.yaml
+spec:
+  serviceName: {{ .Values.mysql.name }}   # Headless service name for stable network ID
+  replicas: 1                             # MySQL typically runs as a single instance
+  selector:
+    matchLabels:
+      app: mysql
+  template:
+    metadata:
+      labels:
+        app: mysql
+    spec:
+      containers:
+        - name: mysql
+          image: {{ .Values.mysql.image }}   # MySQL image version
+          env:                               # Environment variables for DB initialization
+            - name: MYSQL_ROOT_PASSWORD
+              value: {{ .Values.mysql.rootPassword }}
+            - name: MYSQL_DATABASE
+              value: {{ .Values.mysql.database }}
+            - name: MYSQL_USER
+              value: {{ .Values.mysql.user }}
+            - name: MYSQL_PASSWORD
+              value: {{ .Values.mysql.password }}
+          ports:
+            - containerPort: 3306             # Expose MySQL default port
+          volumeMounts:
+            - name: mysql-persistent-storage  # Mount PVC inside container
+              mountPath: /var/lib/mysql       # MySQL data directory
+  volumeClaimTemplates:                       # Creates PVC automatically per replica
+    - metadata:
+        name: mysql-persistent-storage
+      spec:
+        accessModes: {{ .Values.mysql.pvc.accessModes }}   # Typically ReadWriteOnce
+        storageClassName: {{ .Values.mysql.pvc.storageClassName }}
+        resources:
+          requests:
+            storage: {{ .Values.mysql.pvc.size }}          # Storage size from values.yaml
