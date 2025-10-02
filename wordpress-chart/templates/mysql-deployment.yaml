@@ -1,8 +1,10 @@
 apiVersion: apps/v1
-kind: Deployment
+kind: StatefulSet
 metadata:
-  name: mysql
+  name: {{ .Values.mysql.name }}
 spec:
+  serviceName: {{ .Values.mysql.name }}
+  replicas: 1
   selector:
     matchLabels:
       app: mysql
@@ -25,3 +27,15 @@ spec:
               value: {{ .Values.mysql.password }}
           ports:
             - containerPort: 3306
+          volumeMounts:
+            - name: mysql-persistent-storage
+              mountPath: /var/lib/mysql
+  volumeClaimTemplates:
+    - metadata:
+        name: mysql-persistent-storage
+      spec:
+        accessModes: {{ .Values.mysql.pvc.accessModes }}
+        storageClassName: {{ .Values.mysql.pvc.storageClassName }}
+        resources:
+          requests:
+            storage: {{ .Values.mysql.pvc.size }}
