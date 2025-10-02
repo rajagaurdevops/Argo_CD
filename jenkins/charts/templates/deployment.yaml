@@ -1,9 +1,10 @@
 apiVersion: apps/v1
-kind: Deployment
+kind: StatefulSet
 metadata:
   name: jenkins
 spec:
-  replicas: {{ .Values.replicaCount }}
+  serviceName: jenkins                  # Headless service required for StatefulSet
+  replicas: {{ .Values.replicaCount }}  # Number of Jenkins replicas
   selector:
     matchLabels:
       app: jenkins
@@ -14,21 +15,29 @@ spec:
     spec:
       containers:
         - name: jenkins
-          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"   # Jenkins image
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           ports:
-            - containerPort: 8080
+            - containerPort: 8080                   # Jenkins web UI port
           volumeMounts:
             - name: jenkins-home
-              mountPath: /var/jenkins_home
+              mountPath: /var/jenkins_home          # Persistent Jenkins home
           {{- if .Values.configMap.enabled }}
-          envFrom:
+          envFrom:                                  # Inject env variables from ConfigMap
             - configMapRef:
                 name: {{ .Values.configMap.name }}
           {{- end }}
-          resources:
+          resources:                                # CPU & memory resources
             {{- toYaml .Values.resources | nindent 12 }}
-      volumes:
-        - name: jenkins-home
-          persistentVolumeClaim:
-            claimName: jenkins-pvc
+  volumeClaimTemplates:                             # Auto-create PVC per replica
+    - metadata:
+        name: jenkins-home
+      spec:
+        accessModes:
+          - ReadWriteOnce
+        resources:
+          requests:
+            storage: {{ .Values.persistence.size }}   # PVC size from values.yaml
+        {{- if .Values.persistence.storageClass }}
+        storageClassName: {{ .Values.persistence.storageClass }}
+        {{- end }}
