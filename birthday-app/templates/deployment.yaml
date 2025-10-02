@@ -1,19 +1,28 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: birthday-app
+  name: {{  .Values.name }}
 spec:
   replicas: {{ .Values.replicaCount }}
   selector:
     matchLabels:
-      app: birthday-app
+      app: {{  .Values.name }}
   template:
     metadata:
       labels:
-        app: birthday-app
+        app: {{  .Values.name }}
     spec:
       containers:
-        - name: birthday-app
+        - name: {{  .Values.name }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          resources:
+            requests:
+              memory: {{ .Values.resources.requests.memory }}
+              cpu: {{ .Values.resources.requests.cpu }}
+            limits:
+              memory: {{ .Values.resources.limits.memory }}
+              cpu: {{ .Values.resources.limits.cpu }}   
           ports:
             - containerPort: {{ .Values.service.port }}
+
+{{- end}}
