@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: {{ .Values.wordpress.name }}   # StatefulSet name from values.yaml
+spec:
+  serviceName: {{ .Values.wordpress.name }}   # Headless service for stable DNS
+  replicas: {{ .Values.wordpress.replicas }}  # WordPress replica count
+  selector:
+    matchLabels:
+      app: wordpress
+  template:
+    metadata:
+      labels:
+        app: wordpress
+    spec:
+      containers:
+        - name: wordpress
+          image: {{ .Values.wordpress.image }}     # WordPress image version
+          ports:
+            - containerPort: 80                    # HTTP port
+          env:                                     # Database connection settings
+            - name: WORDPRESS_DB_HOST
+              value: {{ .Values.wordpress.env.WORDPRESS_DB_HOST }}
+            - name: WORDPRESS_DB_USER
+              value: {{ .Values.wordpress.env.WORDPRESS_DB_USER }}
+            - name: WORDPRESS_DB_PASSWORD
+              value: {{ .Values.wordpress.env.WORDPRESS_DB_PASSWORD }}
+            - name: WORDPRESS_DB_NAME
+              value: {{ .Values.wordpress.env.WORDPRESS_DB_NAME }}
+          volumeMounts:
+            - name: wordpress-persistent-storage   # PVC for WordPress data
+              mountPath: /var/www/html             # WordPress content directory
+  volumeClaimTemplates:                            # PVC template (1 per replica)
+    - metadata:
+        name: wordpress-persistent-storage
+      spec:
+        accessModes: {{ .Values.wordpress.pvc.accessModes }}   # Typically ReadWriteOnce
+        storageClassName: {{ .Values.wordpress.pvc.storageClassName }}
+        resources:
+          requests:
+            storage: {{ .Values.wordpress.pvc.size }}          # Storage size from values.yaml
