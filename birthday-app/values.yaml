@@ -1,3 +1,7 @@
+Name: Birthday
+
+enabled: true
+
 replicaCount: 1
 
 image:
@@ -6,6 +10,7 @@ image:
   pullPolicy: IfNotPresent
 
 service:
+  name: birthday-service
   type: ClusterIP
   port: 5001
 
