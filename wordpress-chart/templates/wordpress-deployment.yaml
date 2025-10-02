@@ -1,8 +1,9 @@
 apiVersion: apps/v1
-kind: Deployment
+kind: StatefulSet
 metadata:
-  name: wordpress
+  name: {{ .Values.wordpress.name }}
 spec:
+  serviceName: {{ .Values.wordpress.name }}
   replicas: {{ .Values.wordpress.replicas }}
   selector:
     matchLabels:
@@ -26,3 +27,15 @@ spec:
               value: {{ .Values.wordpress.env.WORDPRESS_DB_PASSWORD }}
             - name: WORDPRESS_DB_NAME
               value: {{ .Values.wordpress.env.WORDPRESS_DB_NAME }}
+          volumeMounts:
+            - name: wordpress-persistent-storage
+              mountPath: /var/www/html
+  volumeClaimTemplates:
+    - metadata:
+        name: wordpress-persistent-storage
+      spec:
+        accessModes: {{ .Values.wordpress.pvc.accessModes }}
+        storageClassName: {{ .Values.wordpress.pvc.storageClassName }}
+        resources:
+          requests:
+            storage: {{ .Values.wordpress.pvc.size }}
