@@ -5,7 +5,7 @@ replicaCount: 1
 
 image:
   repository: your-dockerhub-username/birthday-app
-  tag: latest
+  tag: "20251002192037"
   pullPolicy: IfNotPresent
 
 service:
