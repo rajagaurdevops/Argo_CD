@@ -1,4 +1,5 @@
 wordpress:
+  name: wordpress
   image: wordpress:6.4
   replicas: 1
 
@@ -12,7 +13,15 @@ wordpress:
     WORDPRESS_DB_PASSWORD: admin        
     WORDPRESS_DB_NAME: wordpress
 
+  pvc:
+    enabled: true
+    storageClassName: standard   # Change based on your cluster
+    accessModes:
+      - ReadWriteOnce
+    size: 10Gi
+
 mysql:
+  name: mysql
   image: mysql:5.7
   rootPassword: rootpass
   database: wordpress
@@ -20,3 +29,10 @@ mysql:
   password: admin              
   service:
     port: 3306
+
+  pvc:
+    enabled: true
+    storageClassName: standard   # Change if needed
+    accessModes:
+      - ReadWriteOnce
+    size: 5Gi
