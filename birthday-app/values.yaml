@@ -1,10 +1,9 @@
 name: birthday
 
-enabled: true
 replicaCount: 1
 
 image:
-  repository: your-dockerhub-username/birthday-app
+  repository: rajagaurdevops/birthday-app
   tag: "20251002192037"
   pullPolicy: IfNotPresent
 
