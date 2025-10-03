@@ -1,7 +1,7 @@
 replicaCount: 1
 
 image:
-  repository: your-dockerhub-username/birthday-app
+  repository: rajagaurdevops/birthday-app
   tag: latest
   pullPolicy: IfNotPresent
 
