@@ -91,3 +91,46 @@ argocd repo add git@github.com:argoproj/argocd-example-apps.git --ssh-private-ke
 <p align="center">
   <img src="https://argo-cd.readthedocs.io/en/latest/assets/repo-add-overview.png" alt="ArgoCD Connect Repo Overview" width="600"/>
 </p>
+
+Click Connect Repo using SSH button, enter the URL and paste the SSH private key
+
+<p align="center">
+  <img src="https://argo-cd.readthedocs.io/en/latest/assets/repo-add-ssh.png" alt="ArgoCD Connect Repo via SSH" width="600"/>
+</p>
+
+Click Connect to test the connection and have the repository added
+
+### 3. GitHub App
+
+Private repositories hosted on GitHub or GitHub Enterprise can be accessed using a GitHub App<br>
+Note: The app must have at least read-only permissions to the repository contents
+
+## Using CLI
+```bash
+argocd repo add https://github.com/argoproj/argocd-example-apps.git \
+--github-app-id 1 \
+--github-app-installation-id 2 \
+--github-app-private-key-path test.private-key.pem
+```
+
+## Using UI
+
+<p align="center">
+  <img src="https://argo-cd.readthedocs.io/en/latest/assets/repo-add-overview.png" alt="ArgoCD Connect Repo Overview" width="600"/>
+</p>
+
+Click Connect Repo using GitHub App button, choose type: GitHub or GitHub Enterprise, enter the URL, App Id, Installation Id, and the app's private key
+
+<p align="center">
+  <img src="https://argo-cd.readthedocs.io/en/latest/assets/repo-add-github-app.png" alt="ArgoCD Connect Repo via GitHub App" width="600"/>
+</p>
+
+
+> ⚠️ **Note:**  
+> If you add only the **private key** in ArgoCD but forget to add the corresponding **public key** to your GitHub repository (under *Deploy Keys* or *SSH Keys*),  
+> ArgoCD will fail to connect to the repository.  
+> You will see an error like:  
+> **`Permission denied (publickey)`** or **`Authentication failed`**.
+
+
+
