@@ -24,3 +24,24 @@ kubectl create namespace argocd
 ```
 kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
 ```
+
+### Step 3: Access ArgoCD Server
+
+By default, ArgoCD uses a **ClusterIP** service, so we need to use port forwarding to access the UI:
+
+```bash
+kubectl port-forward svc/argocd-server -n argocd 8080:443
+```
+
+After running the above command, open your browser and visit:
+
+https://localhost:8080
+
+### Step 4: Get Initial Admin Password
+
+ArgoCD generates an initial admin password automatically. To retrieve it, run:
+
+```
+kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d
+```
+
