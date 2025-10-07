@@ -2,6 +2,10 @@
 
 This guide explains how to **install ArgoCD**, connect a **Git repository**, and deploy applications to a **Kubernetes cluster** using **GitOps**.  
 
+# what is Argocd
+
+ArgoCD is a declarative GitOps continuous delivery tool for Kubernetes. It helps you automatically deploy and manage applications in your Kubernetes cluster using Git as the single source of truth
+
 ---
 
 ## **Prerequisites**
