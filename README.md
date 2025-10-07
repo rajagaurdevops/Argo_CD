@@ -49,3 +49,21 @@ ArgoCD generates an initial admin password automatically. To retrieve it, run:
 kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d
 ```
 
+# ArgoCD Repository Credentials
+
+ArgoCD allows connecting to private Git repositories using **HTTPS**, **SSH**, **GitHub App**, or **Google Cloud Source** credentials. Below are the detailed instructions for each method.
+
+---
+
+## 1. HTTPS Username and Password
+
+Private repositories that require a username and password typically have URLs starting with `https://`.
+
+### Using CLI:
+
+```bash
+argocd repo add https://github.com/argoproj/argocd-example-apps --username <username> --password <password>
+```
+# using ui
+
+<p align="center"> <img src="https://argo-cd.readthedocs.io/en/latest/assets/repo-add-overview.png" alt="ArgoCD Connect Repo Overview" width="600"/> </p>
