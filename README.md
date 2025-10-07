@@ -71,5 +71,5 @@ argocd repo add https://github.com/argoproj/argocd-example-apps --username <user
 Click Connect Repo using HTTPS button and enter credentials
 
 <div align="center">
-  <img src="https://argo-cd.readthedocs.io/en/latest/assets/repo-add-https.png" alt="Connect Repo using HTTPS" width="600"/>
+  <img src="https://argo-cd.readthedocs.io/en/latest/assets/repo-add-https.png" alt="Connect Repo using HTTPS" width="500"/>
 </div
