@@ -64,7 +64,7 @@ Private repositories that require a username and password typically have URLs st
 ```bash
 argocd repo add https://github.com/argoproj/argocd-example-apps --username <username> --password <password>
 ```
-# using ui
+# Using UI
 
 <p align="center"> <img src="https://argo-cd.readthedocs.io/en/latest/assets/repo-add-overview.png" alt="ArgoCD Connect Repo Overview" width="600"/> </p>
 
@@ -73,3 +73,21 @@ Click Connect Repo using HTTPS button and enter credentials
 <div align="center">
   <img src="https://argo-cd.readthedocs.io/en/latest/assets/repo-add-https.png" alt="Connect Repo using HTTPS" width="500"/>
 </div
+
+
+## 2. SSH Private Key
+
+Private repositories requiring an SSH private key usually have URLs starting with git@ or ssh://<br>
+Note: ArgoCD 2.4 upgraded to OpenSSH 8.9. OpenSSH 8.8 dropped support for ssh-rsa SHA-1. See ArgoCD upgrade guide for details
+
+### Using CLI:
+
+```bash
+argocd repo add git@github.com:argoproj/argocd-example-apps.git --ssh-private-key-path ~/.ssh/id_rsa
+```
+
+# Using UI:
+
+<p align="center">
+  <img src="https://argo-cd.readthedocs.io/en/latest/assets/repo-add-overview.png" alt="ArgoCD Connect Repo Overview" width="600"/>
+</p>
