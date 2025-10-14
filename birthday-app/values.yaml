@@ -4,7 +4,7 @@ replicaCount: 1
 
 image:
   repository: rajagaurdevops/birthday-app
-  tag: "20251002192037"
+  tag: "bad70c6a584d7661f7c9fbd4ec5061ec706d9843-20251014141811"
   pullPolicy: IfNotPresent
 
 service:
