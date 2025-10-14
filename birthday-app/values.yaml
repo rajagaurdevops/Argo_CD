@@ -3,8 +3,8 @@ name: birthday
 replicaCount: 1
 
 image:
-  repository: rajagaurdevops/birthday-app
-  tag: "bad70c6a584d7661f7c9fbd4ec5061ec706d9843-20251014141811"
+  repository: 783764605244.dkr.ecr.us-east-1.amazonaws.com/birthday-app
+  tag: "926a40dd0967533e6780e4cb30b00c8129b6e332-20251014154400"
   pullPolicy: IfNotPresent
 
 service:
